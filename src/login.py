@@ -1,14 +1,18 @@
 import re
 import psycopg2
+import os
 from werkzeug.security import generate_password_hash, check_password_hash
 
-
+"""
 conn = psycopg2.connect(
     user = 'calendaruser',
     password = 'kn8@Noda',
     dbname = 'calendar',
     port = 5432
 )
+"""
+dsn = os.environ.get('DATABASE_URL')
+conn = psycopg2.connect(dsn)
 conn.set_client_encoding('utf-8')
 cur = conn.cursor()
 

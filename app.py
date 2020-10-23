@@ -1,4 +1,6 @@
 from flask import *
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from werkzeug.exceptions import BadRequestKeyError
 from src.calendrier import calendar
 from src.login import userInput, userOutput
@@ -10,6 +12,8 @@ import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'calendar key'
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
