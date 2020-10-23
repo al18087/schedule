@@ -57,7 +57,7 @@ def register(userID, start_time, end_time, content):
 
 
 def registerDate(userID, date, content): 
-    cur.execute('INSERT INTO scheduledate (userID, day, content)'
+    cur.execute('INSERT INTO scheduledate (userID, hinichi, content)'
         'VALUES (%s, %s, %s)', (userID, date, content))
     conn.commit()
 
@@ -83,7 +83,7 @@ def deleteSchedule(userID, start_time):
     start_date = datetime(year, month, day)
 
     cur.execute('DELETE FROM scheduledate WHERE userID = %s'
-        'AND day = %s AND content = %s',
+        'AND hinichi = %s AND content = %s',
         (userID, start_date, content))
     conn.commit()
 

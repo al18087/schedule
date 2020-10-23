@@ -38,7 +38,7 @@ ALTER TABLE public.mybook OWNER TO postgres;
 
 CREATE TABLE public.scheduledate (
     userid character varying(127) NOT NULL,
-    day date,
+    hinichi date,
     content character varying(2048) NOT NULL
 );
 
@@ -71,7 +71,7 @@ COPY public.mybook (userid, password) FROM stdin;
 -- Data for Name: scheduledate; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.scheduledate (userid, day, content) FROM stdin;
+COPY public.scheduledate (userid, hinichi, content) FROM stdin;
 \.
 
 
