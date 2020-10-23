@@ -87,7 +87,7 @@
                         </td>
 
                         <!--春分の日-->
-                        {% elif (day == 20 and month == 3 and year == 2020) or (day == 20 and month == 3 and year == 2021) or (day == 21 and month == 3 and year == 2022) or (day == 21 and month == 3 and year == 2023) %}
+                        {% elif (day == 20 and month == 3 and year == 2020) or (day == 20 and month == 3 and year == 2021) or (day == 21 and month == 3 and year == 2022) or (day == 21 and month == 3 and year == 2023) or (day == 20 and month == 3 and year == 2024) %}
                         <td class="table-danger">
                             <button class="day_clear-decoration btn btn-lg" type="submit" name="day" value="{{ day }}">{{ day }}</button>
                             {% if day in day_stars %}
@@ -124,6 +124,33 @@
 
                         <!--成人の日, スポーツの日-->
                         {% elif (day == kalendae[2][1] and month == 1 and (year != 2023 and year != 2024)) or (day == kalendae[2][1] and month == 10 and (year != 2020 and year != 2023)) %}
+                        <td class="table-danger">
+                            <button class="day_clear-decoration btn btn-lg" type="submit" name="day" value="{{ day }}">{{ day }}</button>
+                            {% if day in day_stars %}
+                            ★
+                            {% endif %}
+                        </td>
+
+                        <!--振替休日(2020)-->
+                        {% elif (day == 24 and month == 2 and year == 2020) or (day == 6 and month == 5 and year == 2020) %}
+                        <td class="table-danger">
+                            <button class="day_clear-decoration btn btn-lg" type="submit" name="day" value="{{ day }}">{{ day }}</button>
+                            {% if day in day_stars %}
+                            ★
+                            {% endif %}
+                        </td>
+
+                        <!--振替休日(2023)-->
+                        {% elif day == 2 and month == 1 and year == 2023 %}
+                        <td class="table-danger">
+                            <button class="day_clear-decoration btn btn-lg" type="submit" name="day" value="{{ day }}">{{ day }}</button>
+                            {% if day in day_stars %}
+                            ★
+                            {% endif %}
+                        </td>
+
+                        <!--振替休日(2024)-->
+                        {% elif (day == 12 and month == 2 and year == 2024) or (day == 6 and month == 5 and year == 2024) or (day == 12 and month == 8 and year == 2024) or (day == 23 and month == 9 and year == 2024) or (day == 4 and month == 11 and year == 2024) %}
                         <td class="table-danger">
                             <button class="day_clear-decoration btn btn-lg" type="submit" name="day" value="{{ day }}">{{ day }}</button>
                             {% if day in day_stars %}
