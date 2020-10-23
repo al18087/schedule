@@ -29,7 +29,7 @@ def scheList(userID, date):
     schedules = []
     for content in contents:
         schedule_info = []
-        cur.execute('SELECT * FROM nodaschedule WHERE userID = %s AND content = %s', (userID, content))
+        cur.execute('SELECT * FROM schedule WHERE userID = %s AND content = %s', (userID, content))
         
         for row in cur.fetchall():
             if (row[1].year == date.year) and (row[1].month == date.month) and (row[1].day == date.day):

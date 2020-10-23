@@ -32,14 +32,14 @@ def userInput(userID, passWord):
 
     # パスワードをハッシュ化
     passWord = generate_password_hash(passWord)
-    cur.execute('SELECT userID FROM noda WHERE UserID = %s', (userID,))
+    cur.execute('SELECT userID FROM info WHERE UserID = %s', (userID,))
 
     if cur.rowcount == 1:
         cur.close()
         conn.close()
         return 1
     elif (cur.rowcount == 0):
-        cur.execute('INSERT INTO noda (userID, password) VALUES (%s, %s)', (userID, passWord))
+        cur.execute('INSERT INTO info (userID, password) VALUES (%s, %s)', (userID, passWord))
         conn.commit()
         cur.close()
         conn.close()
@@ -48,7 +48,7 @@ def userInput(userID, passWord):
 
 
 def userOutput(userID, passWord):
-    cur.execute('SELECT password FROM noda WHERE userID = %s', (userID,))
+    cur.execute('SELECT password FROM info WHERE userID = %s', (userID,))
 
     if cur.rowcount == 0:
         return 1

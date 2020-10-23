@@ -21,35 +21,22 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: noda; Type: TABLE; Schema: public; Owner: postgres
+-- Name: info; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.noda (
+CREATE TABLE public.info (
     userid character varying(127) NOT NULL,
     password character varying(255) NOT NULL
 );
 
 
-ALTER TABLE public.noda OWNER TO postgres;
+ALTER TABLE public.info OWNER TO postgres;
 
 --
--- Name: nodadate; Type: TABLE; Schema: public; Owner: postgres
+-- Name: schedule; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.nodadate (
-    userid character varying(127) NOT NULL,
-    hinichi date,
-    content character varying(2048) NOT NULL
-);
-
-
-ALTER TABLE public.nodadate OWNER TO postgres;
-
---
--- Name: nodaschedule; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.nodaschedule (
+CREATE TABLE public.schedule (
     userid character varying(127) NOT NULL,
     starttime timestamp without time zone,
     endtime timestamp without time zone,
@@ -57,29 +44,42 @@ CREATE TABLE public.nodaschedule (
 );
 
 
-ALTER TABLE public.nodaschedule OWNER TO postgres;
+ALTER TABLE public.schedule OWNER TO postgres;
 
 --
--- Data for Name: noda; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Name: scheduledate; Type: TABLE; Schema: public; Owner: postgres
 --
 
-COPY public.noda (userid, password) FROM stdin;
+CREATE TABLE public.scheduledate (
+    userid character varying(127) NOT NULL,
+    hinichi date,
+    content character varying(2048) NOT NULL
+);
+
+
+ALTER TABLE public.scheduledate OWNER TO postgres;
+
+--
+-- Data for Name: info; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.info (userid, password) FROM stdin;
 \.
 
 
 --
--- Data for Name: nodadate; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: schedule; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.nodadate (userid, hinichi, content) FROM stdin;
+COPY public.schedule (userid, starttime, endtime, content) FROM stdin;
 \.
 
 
 --
--- Data for Name: nodaschedule; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: scheduledate; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.nodaschedule (userid, starttime, endtime, content) FROM stdin;
+COPY public.scheduledate (userid, hinichi, content) FROM stdin;
 \.
 
 
