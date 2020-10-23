@@ -16,7 +16,7 @@ conn.set_client_encoding('utf-8')
 cur = conn.cursor()
 
 def registed(userID, date):
-    cur.execute('SELECT * FROM scheduledate WHERE userID = %s AND hinichi = %s', (userID, date))
+    cur.execute('SELECT * FROM schedule WHERE userID = %s AND hinichi = %s', (userID, date))
     for row in cur.fetchall():
         if row[1] == None:
             break

@@ -26,32 +26,32 @@ SET default_table_access_method = heap;
 -- Name: mybook; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.mybook (
+CREATE TABLE public.user (
     userid character varying(127) NOT NULL,
     password character varying(255) NOT NULL
 );
 
 
-ALTER TABLE public.mybook OWNER TO postgres;
+ALTER TABLE public.user OWNER TO postgres;
 
 --
 -- Name: scheduledate; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.scheduledate (
+CREATE TABLE public.schedule (
     userid character varying(127) NOT NULL,
     hinichi date,
     content character varying(2048) NOT NULL
 );
 
 
-ALTER TABLE public.scheduledate OWNER TO postgres;
+ALTER TABLE public.schedule OWNER TO postgres;
 
 --
 -- Name: yotei; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.yotei (
+CREATE TABLE public.scheduleyotei (
     userid character varying(127) NOT NULL,
     starttime timestamp without time zone,
     endtime timestamp without time zone,
@@ -59,13 +59,13 @@ CREATE TABLE public.yotei (
 );
 
 
-ALTER TABLE public.yotei OWNER TO postgres;
+ALTER TABLE public.scheduleyotei OWNER TO postgres;
 
 --
 -- Data for Name: mybook; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.mybook (userid, password) FROM stdin;
+COPY public.user (userid, password) FROM stdin;
 \.
 
 
@@ -73,7 +73,7 @@ COPY public.mybook (userid, password) FROM stdin;
 -- Data for Name: scheduledate; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.scheduledate (userid, hinichi, content) FROM stdin;
+COPY public.schedule (userid, hinichi, content) FROM stdin;
 \.
 
 
@@ -81,7 +81,7 @@ COPY public.scheduledate (userid, hinichi, content) FROM stdin;
 -- Data for Name: yotei; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.yotei (userid, starttime, endtime, content) FROM stdin;
+COPY public.scheduleyotei (userid, starttime, endtime, content) FROM stdin;
 \.
 
 
@@ -89,21 +89,21 @@ COPY public.yotei (userid, starttime, endtime, content) FROM stdin;
 -- Name: TABLE mybook; Type: ACL; Schema: public; Owner: postgres
 --
 
-GRANT SELECT,INSERT,DELETE ON TABLE public.mybook TO calendaruser;
+GRANT SELECT,INSERT,DELETE ON TABLE public.user TO calendaruser;
 
 
 --
 -- Name: TABLE scheduledate; Type: ACL; Schema: public; Owner: postgres
 --
 
-GRANT SELECT,INSERT,DELETE ON TABLE public.scheduledate TO calendaruser;
+GRANT SELECT,INSERT,DELETE ON TABLE public.schedule TO calendaruser;
 
 
 --
 -- Name: TABLE yotei; Type: ACL; Schema: public; Owner: postgres
 --
 
-GRANT SELECT,INSERT,DELETE ON TABLE public.yotei TO calendaruser;
+GRANT SELECT,INSERT,DELETE ON TABLE public.scheduleyotei TO calendaruser;
 
 
 --
