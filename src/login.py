@@ -32,7 +32,17 @@ def userInput(userID, passWord):
 
     # パスワードをハッシュ化
     passWord = generate_password_hash(passWord)
-    cur.execute('SELECT userid FROM info WHERE userid = %s', (userID,))
+
+    while True:
+        try:
+            conn = psycopg2.connect(dsn)
+            conn.set_client_encoding('utf-8')
+            cur = conn.cursor()
+            cur.execute('SELECT userid FROM info WHERE userid = %s', (userID,))
+        except psycopg2.InterfaceError:
+            continue
+
+        break
 
     if cur.rowcount == 1:
         cur.close()
@@ -48,7 +58,17 @@ def userInput(userID, passWord):
 
 
 def userOutput(userID, passWord):
-    cur.execute('SELECT password FROM info WHERE userid = %s', (userID,))
+    while True:
+        try:
+            conn = psycopg2.connect(dsn)
+            conn.set_client_encoding('utf-8')
+            cur = conn.cursor()
+            cur.execute('SELECT password FROM info WHERE userid = %s', (userID,))
+        except psycopg2.InterfaceError:
+            continue
+
+        break
+
 
     if cur.rowcount == 0:
         return 1
