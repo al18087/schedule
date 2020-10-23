@@ -29,7 +29,16 @@ def scheList(userID, date):
     schedules = []
     for content in contents:
         schedule_info = []
-        cur.execute('SELECT * FROM schedule WHERE userid = %s AND content = %s', (userID, content))
+
+        while True:
+            try:
+                conn = psycopg2.connect(dsn)
+                conn.set_client_encoding('utf-8')
+                cur = conn.cursor()
+                cur.execute('SELECT * FROM schedule WHERE userid = %s AND content = %s', (userID, content))
+            except psycopg2.InterfaceError:
+                continue
+            break
         
         for row in cur.fetchall():
             if (row[1].year == date.year) and (row[1].month == date.month) and (row[1].day == date.day):
