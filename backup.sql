@@ -20,38 +20,36 @@ SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
-
-
 --
--- Name: mybook; Type: TABLE; Schema: public; Owner: postgres
+-- Name: noda; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.user (
+CREATE TABLE public.noda (
     userid character varying(127) NOT NULL,
     password character varying(255) NOT NULL
 );
 
 
-ALTER TABLE public.user OWNER TO postgres;
+ALTER TABLE public.noda OWNER TO postgres;
 
 --
--- Name: scheduledate; Type: TABLE; Schema: public; Owner: postgres
+-- Name: nodadate; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.schedule (
+CREATE TABLE public.nodadate (
     userid character varying(127) NOT NULL,
     hinichi date,
     content character varying(2048) NOT NULL
 );
 
 
-ALTER TABLE public.schedule OWNER TO postgres;
+ALTER TABLE public.nodadate OWNER TO postgres;
 
 --
--- Name: yotei; Type: TABLE; Schema: public; Owner: postgres
+-- Name: nodaschedule; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.scheduleyotei (
+CREATE TABLE public.nodaschedule (
     userid character varying(127) NOT NULL,
     starttime timestamp without time zone,
     endtime timestamp without time zone,
@@ -59,51 +57,71 @@ CREATE TABLE public.scheduleyotei (
 );
 
 
-ALTER TABLE public.scheduleyotei OWNER TO postgres;
+ALTER TABLE public.nodaschedule OWNER TO postgres;
 
 --
--- Data for Name: mybook; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Name: user; Type: TABLE; Schema: public; Owner: calendaruser
 --
 
-COPY public.user (userid, password) FROM stdin;
+CREATE TABLE public."user" (
+    userid character varying(127) NOT NULL,
+    password character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public."user" OWNER TO calendaruser;
+
+--
+-- Data for Name: noda; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.noda (userid, password) FROM stdin;
 \.
 
 
 --
--- Data for Name: scheduledate; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: nodadate; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.schedule (userid, hinichi, content) FROM stdin;
+COPY public.nodadate (userid, hinichi, content) FROM stdin;
 \.
 
 
 --
--- Data for Name: yotei; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: nodaschedule; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.scheduleyotei (userid, starttime, endtime, content) FROM stdin;
+COPY public.nodaschedule (userid, starttime, endtime, content) FROM stdin;
 \.
 
 
 --
--- Name: TABLE mybook; Type: ACL; Schema: public; Owner: postgres
+-- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: calendaruser
 --
 
-GRANT SELECT,INSERT,DELETE ON TABLE public.user TO calendaruser;
-
-
---
--- Name: TABLE scheduledate; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT SELECT,INSERT,DELETE ON TABLE public.schedule TO calendaruser;
+COPY public."user" (userid, password) FROM stdin;
+\.
 
 
 --
--- Name: TABLE yotei; Type: ACL; Schema: public; Owner: postgres
+-- Name: TABLE noda; Type: ACL; Schema: public; Owner: postgres
 --
 
-GRANT SELECT,INSERT,DELETE ON TABLE public.scheduleyotei TO calendaruser;
+GRANT SELECT,INSERT,DELETE ON TABLE public.noda TO calendaruser;
+
+
+--
+-- Name: TABLE nodadate; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT SELECT,INSERT,DELETE ON TABLE public.nodadate TO calendaruser;
+
+
+--
+-- Name: TABLE nodaschedule; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT SELECT,INSERT,DELETE ON TABLE public.nodaschedule TO calendaruser;
 
 
 --
