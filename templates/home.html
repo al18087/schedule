@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>カレンダー</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/calender.css">
+</head>
+
+<body>
+    <form action="{{ url_for('home', userID=userID) }}" method="POST">
+        <div class="jumbotron text-center">
+            <h1>カレンダー</h1>
+        </div>
+
+        <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #f0ffff;">
+            <div class="nav-link">{{ userID }}さん, こんにちは!!!</div>
+            <div class="nav-link">年
+                <select name="year">
+                    <option value="null" disabled selected>年を選択</option>
+                    <option value="2020">2020年</option>
+                    <option value="2021">2021年</option>
+                    <option value="2022">2022年</option>
+                    <option value="2023">2023年</option>
+                    <option value="2024">2024年</option>
+                </select>
+            </div>
+
+            <div class="nav-link">月
+                <select name="month">
+                    <option value="null" disabled selected>月を選択</option>
+                    <option value="1">1月</option>
+                    <option value="2">2月</option>
+                    <option value="3">3月</option>
+                    <option value="4">4月</option>
+                    <option value="5">5月</option>
+                    <option value="6">6月</option>
+                    <option value="7">7月</option>
+                    <option value="8">8月</option>
+                    <option value="9">9月</option>
+                    <option value="10">10月</option>
+                    <option value="11">11月</option>
+                    <option value="12">12月</option>
+                </select>
+            </div>
+            <div class="nav-link"><input type="submit" class="btn btn-link text-info" value="検索"></div>
+            <div class="nav-link"><input type="submit" class="btn btn-link text-info" name="logout" value="ログアウト"></div>
+        </nav>
+    </form>
+    <!--
+    <form action="{{ url_for('logout') }}" method="GET" class="logout">
+        <input type="submit" value="ログアウト">
+    </form>
+    -->
+
+    <form action="{{ url_for('schedule', userID=userID, year=year, month=month) }}" method="POST">
+        <h6 class="mx-auto text-danger" style="width: 400px;">※カレンダーの日付の部分をクリックすると，新規予定を作成できます。</h6><br>
+        <h1 class="mx-auto" style="width: 400px;">{{ year }}年{{ month }}月</h1><br>
+        <div class="col-sm-6 mx-auto" style="width: 800px;">
+            <table class="table">
+                <thead class="thead-light"></thead>
+                    <tr>
+                        <th class="table-danger">Sunday</th>
+                        <th class="table-active">Monday</th>
+                        <th class="table-active">Tuesday</th>
+                        <th class="table-active">Wednesday</th>
+                        <th class="table-active">Thursday</th>
+                        <th class="table-active">Friday</th>
+                        <th class="table-info">Saturday</th>
+                    </tr>
+                </thead>
+                {% for week in kalendae %}
+                    <tr>
+                    {% for day in week %}
+                        {% if day <= 0 %}
+                        <td></td>
+
+                        <!--本日-->
+                        {% elif day == hinichi %}
+                        <td class="table-success">
+                            <button class="day_clear-decoration btn btn-lg" type="submit" name="day" value="{{ day }}">{{ day }}</button>
+                            {% if day in day_stars %}
+                            ★
+                            {% endif %}
+                        </td>
+
+                        <!--春分の日-->
+                        {% elif (day == 20 and month == 3 and year == 2020) or (day == 20 and month == 3 and year == 2021) or (day == 21 and month == 3 and year == 2022) or (day == 21 and month == 3 and year == 2023) %}
+                        <td class="table-danger">
+                            <button class="day_clear-decoration btn btn-lg" type="submit" name="day" value="{{ day }}">{{ day }}</button>
+                            {% if day in day_stars %}
+                            ★
+                            {% endif %}
+                        </td>
+
+                        <!--秋分の日-->
+                        {% elif (day == 22 and month == 9 and year == 2020) or (day == 23 and month == 9 and year == 2021) or (day == 23 and month == 9 and year == 2022) or (day == 23 and month == 9 and year == 2023) %}
+                        <td class="table-danger">
+                            <button class="day_clear-decoration btn btn-lg" type="submit" name="day" value="{{ day }}">{{ day }}</button>
+                            {% if day in day_stars %}
+                            ★
+                            {% endif %}
+                        </td>
+
+                        <!--山の日-->
+                        {% elif (day == 10 and month == 8 and year == 2020) or (day == 11 and month == 8 and year == 2021) or (day == 11 and month == 8 and year == 2022) or (day == 11 and month == 8 and year == 2023) %}
+                        <td class="table-danger">
+                            <button class="day_clear-decoration btn btn-lg" type="submit" name="day" value="{{ day }}">{{ day }}</button>
+                            {% if day in day_stars %}
+                            ★
+                            {% endif %}
+                        </td>
+
+                        <!--海の日(2020), スポーツの日(2020)-->
+                        {% elif (day == 23 and month == 7 and year == 2020) or (day == 24 and month == 7 and year == 2020) %}
+                        <td class="table-danger">
+                            <button class="day_clear-decoration btn btn-lg" type="submit" name="day" value="{{ day }}">{{ day }}</button>
+                            {% if day in day_stars %}
+                            ★
+                            {% endif %}
+                        </td>
+
+                        <!--成人の日, スポーツの日-->
+                        {% elif (day == kalendae[2][1] and month == 1 and (year != 2023 and year != 2024)) or (day == kalendae[2][1] and month == 10 and (year != 2020 and year != 2023)) %}
+                        <td class="table-danger">
+                            <button class="day_clear-decoration btn btn-lg" type="submit" name="day" value="{{ day }}">{{ day }}</button>
+                            {% if day in day_stars %}
+                            ★
+                            {% endif %}
+                        </td>
+                        
+                        {% elif (day == kalendae[1][1] and month == 1 and (year == 2023 or year == 2024)) or (day == kalendae[1][1] and month == 10 and year == 2023) %}
+                        <td class="table-danger">
+                            <button class="day_clear-decoration btn btn-lg" type="submit" name="day" value="{{ day }}">{{ day }}</button>
+                            {% if day in day_stars %}
+                            ★
+                            {% endif %}
+                        </td>
+
+                        <!--海の日, 敬老の日-->
+                        {% elif (day == kalendae[3][1] and month == 7 and (year != 2020 and year != 2024)) or (day == kalendae[3][1] and month == 9 and year != 2024) %}
+                        <td class="table-danger">
+                            <button class="day_clear-decoration btn btn-lg" type="submit" name="day" value="{{ day }}">{{ day }}</button>
+                            {% if day in day_stars %}
+                            ★
+                            {% endif %}
+                        </td>
+
+                        {% elif (day == kalendae[2][1] and month == 7 and year == 2024) or (day == kalendae[2][1] and month == 9 and year == 2024) %}
+                        <td class="table-danger">
+                            <button class="day_clear-decoration btn btn-lg" type="submit" name="day" value="{{ day }}">{{ day }}</button>
+                            {% if day in day_stars %}
+                            ★
+                            {% endif %}
+                        </td>
+
+                        <!--元日, 建国記念日, 天皇誕生日, 昭和の日, 憲法記念日, みどりの日, こどもの日, 文化の日, 勤労感謝の日-->
+                        {% elif (day == 1 and month == 1) or (day == 11 and month == 2) or (day == 23 and month == 2) or (day == 29 and month == 4) or (day == 3 and month == 5) or (day == 4 and month == 5) or (day == 5 and month == 5) or (day == 3 and month == 11) or (day == 23 and month == 11) %}
+                        <td class="table-danger">
+                            <button class="day_clear-decoration btn btn-lg" type="submit" name="day" value="{{ day }}">{{ day }}</button>
+                            {% if day in day_stars %}
+                            ★
+                            {% endif %}
+                        </td>
+
+                        <!--日曜日-->
+                        {% elif day == week[0] %}
+                        <td class="table-danger">
+                            <button class="day_clear-decoration btn btn-lg" type="submit" name="day" value="{{ day }}">{{ day }}</button>
+                            {% if day in day_stars %}
+                            ★
+                            {% endif %}
+                        </td>
+
+                        <!--土曜日-->
+                        {% elif (day == week[6]) %}
+                        <td class="table-info">
+                            <button class="day_clear-decoration btn btn-lg" type="submit" name="day" value="{{ day }}">{{ day }}</button>
+                            {% if day in day_stars %}
+                            ★
+                            {% endif %}
+                        </td>
+
+                        <!--平日-->
+                        {% else %}
+                        <td class="table-active">
+                            <button class="day_clear-decoration btn btn-lg" type="submit" name="day" value="{{ day }}">{{ day }}</button>
+                            {% if day in day_stars %}
+                            ★
+                            {% endif %}
+                        </td>
+                        {% endif %}
+                    {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+
+</html>

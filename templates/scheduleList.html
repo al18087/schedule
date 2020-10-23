@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>カレンダー</title>
+    <!--<link rel="stylesheet" href="../../../static/schedule.css">-->
+</head>
+
+<body>
+    <form action="{{ url_for('home', userID=userID) }}" method="POST">
+        <div class="jumbotron text-center">
+            <h1>カレンダー</h1>
+        </div>
+
+        <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #f0ffff;">
+            <div class="nav-link">
+                <input type="submit" class="btn btn-link text-info" name="back" value="戻る">
+            </div>
+        </nav>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <ul class=flashes>
+                {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        {% endwith %}
+        
+        <h1 class="mt-4 mb-5 mx-auto" style="width: 400px;">スケジュール一覧</h1>
+        {% if schedules == [] %}
+        <h6 class="mt-4 mb-5 mx-auto" style="width: 400px;">予定がありません。</h6>
+        {% else %}
+        {% for schedule_info in schedules %}
+        <div class="container" style="background-color: #ffe4e1; width: 400px;">
+            <div class="form-group mb-4 mx-auto" style="width: 400px;">
+                <h4 class="text-left">●開始時刻</h4>
+                <label class="mx-auto" style="width: 400px;">{{ schedule_info[1] }}</label>
+            </div>
+
+            <div class="form-group mb-4 mx-auto" style="width: 400px;">
+                <h4 class="text-left">●終了時刻</h4>
+                <label class="mx-auto" style="width: 400px;">{{ schedule_info[2] }}</label>
+            </div>
+
+            <div class="form-group mb-4 mx-auto" style="width: 400px;">
+                <h4 class="text-left">●内容</h4>
+                <label class="mx-auto" style="width: 400px;">{{ schedule_info[3] }}</label>
+            </div>
+
+            <div class="form-group mb-4 mx-auto" style="width: 400px;">
+                <button type="submit" class="btn btn-link" name="delete" value="{{ schedule_info[1] }}">削除</button>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </form>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+
+</html>

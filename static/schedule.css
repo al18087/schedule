@@ -1,0 +1,15 @@
+.schedule_zone {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px dotted #333333;
+    background-color: #fffff0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateY(-50%) translateX(-50%);
+    transform: translateY(-50%) translateX(-50%);
+}
+
+h1, p, ul, li {
+    text-align: center;
+}

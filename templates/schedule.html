@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>カレンダー</title>
+    <link rel="stylesheet" href="../../../static/schedule.css">
+</head>
+
+<body>
+    <form action="{{ url_for('scheduleList', userID=userID, year=year, month=month) }}" method="POST">
+        <div class="jumbotron text-center">
+            <h1>カレンダー</h1>
+        </div>
+        
+        <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #f0ffff;">
+            <div class="nav-link">
+                <button type="submit" class="btn btn-link text-info" name="list" value="{{ day }}">予定一覧</button>
+            </div>
+        </nav>
+    </form>
+
+    <form action="{{ url_for('regist', userID=userID, year=year, month=month, day=day) }}" method="POST">
+        <div class="container" style="background-color: #ffe4e1; width: 400px;">
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <ul class=flashes>
+                {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+
+            <h1 class="mt-4 mb-5 mx-auto" style="width: 400px;">{{ year }}/{{ month }}/{{ day }}</h1>
+            <div class="form-group mb-4 mx-auto" style="width: 400px;">
+                <h4 class="text-left">●開始時刻</h4>
+                <label>時
+                    <select name="start_hour">
+                        <option value="null" disabled selected>選択してください</option>
+                        <option value="0">0時</option>
+                        <option value="1">1時</option>
+                        <option value="2">2時</option>
+                        <option value="3">3時</option>
+                        <option value="4">4時</option>
+                        <option value="5">5時</option>
+                        <option value="6">6時</option>
+                        <option value="7">7時</option>
+                        <option value="8">8時</option>
+                        <option value="9">9時</option>
+                        <option value="10">10時</option>
+                        <option value="11">11時</option>
+                        <option value="12">12時</option>
+                        <option value="13">13時</option>
+                        <option value="14">14時</option>
+                        <option value="15">15時</option>
+                        <option value="16">16時</option>
+                        <option value="17">17時</option>
+                        <option value="18">18時</option>
+                        <option value="19">19時</option>
+                        <option value="20">20時</option>
+                        <option value="21">21時</option>
+                        <option value="22">22時</option>
+                        <option value="23">23時</option>
+                    </select>
+
+                    分
+                    <select name="start_minute">
+                        <option value="null" disabled selected>選択してください</option>
+                        <option value="0">00分</option>
+                        <option value="5">05分</option>
+                        <option value="10">10分</option>
+                        <option value="15">15分</option>
+                        <option value="20">20分</option>
+                        <option value="25">25分</option>
+                        <option value="30">30分</option>
+                        <option value="35">35分</option>
+                        <option value="40">40分</option>
+                        <option value="45">45分</option>
+                        <option value="50">50分</option>
+                        <option value="55">55分</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="form-group mb-4 mx-auto" style="width: 400px;">
+                <h4 class="text-left">●終了時刻</h4>
+                <label>時
+                    <select name="end_hour">
+                        <option value="null" disabled selected>選択してください</option>
+                        <option value="0">0時</option>
+                        <option value="1">1時</option>
+                        <option value="2">2時</option>
+                        <option value="3">3時</option>
+                        <option value="4">4時</option>
+                        <option value="5">5時</option>
+                        <option value="6">6時</option>
+                        <option value="7">7時</option>
+                        <option value="8">8時</option>
+                        <option value="9">9時</option>
+                        <option value="10">10時</option>
+                        <option value="11">11時</option>
+                        <option value="12">12時</option>
+                        <option value="13">13時</option>
+                        <option value="14">14時</option>
+                        <option value="15">15時</option>
+                        <option value="16">16時</option>
+                        <option value="17">17時</option>
+                        <option value="18">18時</option>
+                        <option value="19">19時</option>
+                        <option value="20">20時</option>
+                        <option value="21">21時</option>
+                        <option value="22">22時</option>
+                        <option value="23">23時</option>
+                    </select>
+
+                    分
+                    <select name="end_minute">
+                        <option value="null" disabled selected>選択してください</option>
+                        <option value="0">00分</option>
+                        <option value="5">05分</option>
+                        <option value="10">10分</option>
+                        <option value="15">15分</option>
+                        <option value="20">20分</option>
+                        <option value="25">25分</option>
+                        <option value="30">30分</option>
+                        <option value="35">35分</option>
+                        <option value="40">40分</option>
+                        <option value="45">45分</option>
+                        <option value="50">50分</option>
+                        <option value="55">55分</option>
+                    </select>
+                </label>
+            </div>
+            <div class="form-group mb-4 mx-auto" style="width: 400px;">
+                <h4 class="text-left">●予定</h4>
+                <label><textarea rows="4" name="content" class="form-control mx-auto" style="width: 300px;"></textarea></label>
+            </div>
+            <div class="form-group mb-4 mx-auto" style="width: 400px;">
+                <input type="submit" class="btn btn-link" name="schedule" value="登録">
+                <input type="submit" class="btn btn-link" name="back" value="戻る">
+            </div>
+        </div>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+
+</html>

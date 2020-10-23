@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang='ja'>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>カレンダー</title>
+    <!--<link rel="stylesheet" href="../static/calender.css">-->
+
+</head>
+
+<body>
+    <form action="{{ url_for('createUser') }}" method="GET">
+        <div class="jumbotron text-center">
+            <h1>カレンダー</h1>
+        </div>
+        
+        <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #f0ffff;">
+            <div class="nav-link">
+                <button class="btn btn-link text-info" type="submit">新規登録</button>
+            </div>
+
+            <div class="nav-link">
+                <a href="https://twitter.com/@Noda00572069" class="text-info">お問い合わせ</a>
+            </div>
+        </nav>
+    </form>
+
+    <div class="container" style="background-color: #ffe4e1; width: 400px;">
+        <form action="{{ url_for('login') }}" method="POST">
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <ul class=flashes>
+                {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+
+            <h4 class="mt-4 mb-5 mx-auto" style="width: 400px;">ようこそ、カレンダーへ</h4>
+            <div class="form-group mb-4 mx-auto" style="width: 400px;">
+                <h4 class="text-left">●ユーザー名</h4>
+                <input type="text" name="userID" class="mx-auto" style="width: 300px;" placeholder="ユーザ名">
+            </div>
+            
+            <div class="form-group mb-4 mx-auto" style="width: 400px;">
+                <h4 class="text-left">●パスワード</h4>
+                <input type="password" name="password" class="mx-auto" style="width: 300px;" placeholder="パスワード">
+            </div>
+
+            <div class="form-group mb-4 mx-auto" style="width: 400px;">
+                <button class="btn btn-link" type="submit">ログイン</button>
+            </div>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </body>
+</html>
+
+</body>
+
+</html>
