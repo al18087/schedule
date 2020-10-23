@@ -60,18 +60,6 @@ CREATE TABLE public.nodaschedule (
 ALTER TABLE public.nodaschedule OWNER TO postgres;
 
 --
--- Name: user; Type: TABLE; Schema: public; Owner: calendaruser
---
-
-CREATE TABLE public."user" (
-    userid character varying(127) NOT NULL,
-    password character varying(255) NOT NULL
-);
-
-
-ALTER TABLE public."user" OWNER TO calendaruser;
-
---
 -- Data for Name: noda; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -93,35 +81,6 @@ COPY public.nodadate (userid, hinichi, content) FROM stdin;
 
 COPY public.nodaschedule (userid, starttime, endtime, content) FROM stdin;
 \.
-
-
---
--- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: calendaruser
---
-
-COPY public."user" (userid, password) FROM stdin;
-\.
-
-
---
--- Name: TABLE noda; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT SELECT,INSERT,DELETE ON TABLE public.noda TO calendaruser;
-
-
---
--- Name: TABLE nodadate; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT SELECT,INSERT,DELETE ON TABLE public.nodadate TO calendaruser;
-
-
---
--- Name: TABLE nodaschedule; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT SELECT,INSERT,DELETE ON TABLE public.nodaschedule TO calendaruser;
 
 
 --
