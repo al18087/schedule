@@ -16,7 +16,7 @@ conn.set_client_encoding('utf-8')
 cur = conn.cursor()
 
 def contentInSchedule(userID, date):
-    cur.execute('SELECT content FROM nodadate WHERE userid = %s AND hinichi = %s', (userID, date))
+    cur.execute('SELECT content FROM scheduledate WHERE userid = %s AND hinichi = %s', (userID, date))
     contents = []
     for content in cur.fetchall():
         contents.append(content[0])
