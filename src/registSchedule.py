@@ -18,28 +18,28 @@ cur = conn.cursor()
 
 def register(userID, start_time, end_time, content):
     flag = 0
-    cur.execute('SELECT * FROM schedule WHERE userID = %s'
+    cur.execute('SELECT * FROM schedule WHERE userid = %s'
         'AND starttime >= %s AND starttime <= %s',
         (userID, start_time, end_time))
 
     if cur.rowcount >= 1:
         flag = 1
 
-    cur.execute('SELECT * FROM schedule WHERE userID = %s'
+    cur.execute('SELECT * FROM schedule WHERE userid = %s'
         'AND endtime >= %s AND endtime <= %s',
         (userID, start_time, end_time))
 
     if cur.rowcount >= 1:
         flag = 1
 
-    cur.execute('SELECT * FROM schedule WHERE userID = %s'
+    cur.execute('SELECT * FROM schedule WHERE userid = %s'
         'AND starttime <= %s AND endtime >= %s',
         (userID, start_time, end_time))
 
     if cur.rowcount >= 1:
         flag = 1
 
-    cur.execute('SELECT * FROM schedule WHERE userID = %s'
+    cur.execute('SELECT * FROM schedule WHERE userid = %s'
         'AND starttime >= %s AND endtime <= %s',
         (userID, start_time, end_time))
 
@@ -47,7 +47,7 @@ def register(userID, start_time, end_time, content):
         flag = 1
     
     if flag == 0:
-        cur.execute('INSERT INTO schedule (userID, starttime, endtime, content)'
+        cur.execute('INSERT INTO schedule (userid, starttime, endtime, content)'
             'VALUES (%s, %s, %s, %s)', (userID, start_time, end_time, content))
         conn.commit()
         return 0
@@ -57,7 +57,7 @@ def register(userID, start_time, end_time, content):
 
 
 def registerDate(userID, date, content): 
-    cur.execute('INSERT INTO scheduledate (userID, hinichi, content)'
+    cur.execute('INSERT INTO scheduledate (userid, hinichi, content)'
         'VALUES (%s, %s, %s)', (userID, date, content))
     conn.commit()
 
@@ -69,12 +69,12 @@ def deleteSchedule(userID, start_time):
     #hour = int(start_time.hour)
     #minute = int(start_time.minute)
     #start_time = datetime(year, month, day, hour, minute)
-    cur.execute('SELECT content FROM schedule WHERE userID = %s'
+    cur.execute('SELECT content FROM schedule WHERE userid = %s'
         'AND starttime = %s',
         (userID, start_time))
     content = cur.fetchone()[0]
     
-    cur.execute('DELETE FROM schedule WHERE userID = %s'
+    cur.execute('DELETE FROM schedule WHERE userid = %s'
         'AND starttime = %s',
         (userID, start_time))
     conn.commit()
@@ -82,7 +82,7 @@ def deleteSchedule(userID, start_time):
 
     start_date = datetime(year, month, day)
 
-    cur.execute('DELETE FROM scheduledate WHERE userID = %s'
+    cur.execute('DELETE FROM scheduledate WHERE userid = %s'
         'AND hinichi = %s AND content = %s',
         (userID, start_date, content))
     conn.commit()

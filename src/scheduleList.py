@@ -16,7 +16,7 @@ conn.set_client_encoding('utf-8')
 cur = conn.cursor()
 
 def contentInSchedule(userID, date):
-    cur.execute('SELECT content FROM nodadate WHERE userID = %s AND hinichi = %s', (userID, date))
+    cur.execute('SELECT content FROM nodadate WHERE userid = %s AND hinichi = %s', (userID, date))
     contents = []
     for content in cur.fetchall():
         contents.append(content[0])
@@ -29,7 +29,7 @@ def scheList(userID, date):
     schedules = []
     for content in contents:
         schedule_info = []
-        cur.execute('SELECT * FROM schedule WHERE userID = %s AND content = %s', (userID, content))
+        cur.execute('SELECT * FROM schedule WHERE userid = %s AND content = %s', (userID, content))
         
         for row in cur.fetchall():
             if (row[1].year == date.year) and (row[1].month == date.month) and (row[1].day == date.day):
