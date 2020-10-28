@@ -156,12 +156,6 @@ def schedule(userID, year, month):
 @app.route('/regist/<userID>/<year>/<month>/<day>', methods=['GET', 'POST'])
 def regist(userID, year, month, day):
     try:
-        back = request.form['back']
-        return redirect(url_for('home', userID=userID))
-    except BadRequestKeyError:
-        pass
-
-    try:
         start_hour = int(request.form['start_hour'])
         start_minute = int(request.form['start_minute'])
         end_hour = int(request.form['end_hour'])
@@ -194,6 +188,12 @@ def regist(userID, year, month, day):
 
 @app.route('/scheduleList/<userID>/<year>/<month>', methods=['POST'])
 def scheduleList(userID, year, month):
+    try:
+        back = request.form['back']
+        return redirect(url_for('home', userID=userID))
+    except BadRequestKeyError:
+        pass
+
     day = int(request.form['list'])
     date = datetime(int(year), int(month), day)
     schedules = scheList(userID, date)
