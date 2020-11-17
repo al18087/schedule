@@ -188,13 +188,12 @@ def regist(userID, year, month, day):
 
 @app.route('/scheduleList/<userID>/<year>/<month>', methods=['POST'])
 def scheduleList(userID, year, month):
-    """
     try:
         back = request.form['back']
         return redirect(url_for('home', userID=userID))
     except BadRequestKeyError:
         pass
-    """
+    
 
     day = int(request.form['list'])
     date = datetime(int(year), int(month), day)
